@@ -17,7 +17,7 @@ omega  = torch.rand(1, 103, 64, 64) < 0.9
 model  = RPCA_Net(N_iter=10)
 output = model(data, omega)
 ```
-you can easily plug this model into your training codes. N. B. The batch size must be 1, omega is binary, and the number of channels (103 in this example) is hard-coded in `main_net.py`.
+you can easily plug this model into your training codes. N. B. The batch size must be 1, `omega` is binary, and the number of channels (103 in this example) is hard-coded in `main_net.py`.
 Please also note that the source codes have not been refactored yet, so they are a little ugly.  
 I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work.  
 The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
