@@ -21,3 +21,14 @@ you can easily plug this model into your training codes. N. B. The batch size mu
 Please also note that the source codes have not been refactored yet, so they are a little ugly.  
 I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work.  
 The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
+
+# Citation
+If our algorithm is useful for your research, please kindly cite our work
+```
+@article{Mai2024,
+    author={Mai, Truong Thanh Nhat and Lam, Edmund Y. and Lee, Chul},
+    journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+    title={Attention-Guided Low-Rank Tensor Completion}, 
+    year={2024},
+    doi={10.1109/TPAMI.2024.3429498}
+}
