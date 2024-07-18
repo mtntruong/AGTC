@@ -25,10 +25,11 @@ The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://gi
 # Citation
 If our algorithm is useful for your research, please kindly cite our work
 ```
-@article{Mai2024,
-    author={Mai, Truong Thanh Nhat and Lam, Edmund Y. and Lee, Chul},
-    journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
-    title={Attention-Guided Low-Rank Tensor Completion}, 
-    year={2024},
-    doi={10.1109/TPAMI.2024.3429498}
+@ARTICLE{Mai2024,
+  author={Mai, Truong Thanh Nhat and Lam, Edmund Y. and Lee, Chul},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Attention-Guided Low-Rank Tensor Completion}, 
+  year={2024},
+  pages={1-17},
+  doi={10.1109/TPAMI.2024.3429498}}
 }
