@@ -5,6 +5,8 @@ Truong Thanh Nhat Mai, Edmund Y. Lam, and Chul Lee
 IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024  
 https://doi.org/10.1109/TPAMI.2024.3429498
 
+For PDF, please visit https://mtntruong.github.io/
+
 If you have any question, please open an issue.  
 The algorithm can also be applied to other applications. Please feel free to ask if you need help with training the algorithm using other datasets.
 
@@ -21,6 +23,22 @@ you can easily plug this model into your training codes. N. B. The batch size mu
 Please also note that the source codes have not been refactored yet, so they are a little ugly.  
 I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work.  
 The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
+
+## Preparation
+Please use `env.yml` to create an environment in [Anaconda](https://www.anaconda.com)
+```
+conda env create -f env.yml
+```
+Then activate the environment
+```
+conda activate agtc
+```
+If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
+
+## Training
+```
+To be updated
+```
 
 # Citation
 If our algorithm is useful for your research, please kindly cite our work
