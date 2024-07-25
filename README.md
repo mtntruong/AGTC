@@ -25,6 +25,8 @@ I will try to improve the readability and quality of this repository over time. 
 The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
 
 ## Preparation
+
+### Required Python packages
 Please use `env.yml` to create an environment in [Anaconda](https://www.anaconda.com)
 ```
 conda env create -f env.yml
@@ -34,6 +36,9 @@ Then activate the environment
 conda activate agtc
 ```
 If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
+
+### Data preprocessing
+Please see the scripts in `Data-Preparation` folder in each task. Note that the data for HDR imaging have not been uploaded yet.
 
 ## Training
 ```
