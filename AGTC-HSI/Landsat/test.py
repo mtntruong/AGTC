@@ -51,7 +51,7 @@ def create_images(ckpt_path, N_iter):
     w_grid = np.array(w_grid, dtype=np.uint16)
     h_grid = np.array(h_grid, dtype=np.uint16)
 
-    f = h5py.File('inpainting_Landsat.mat', 'r')
+    f = h5py.File('Landsat_test.mat', 'r')
     reader = f.get('Nmsi')
     data = torch.from_numpy(np.array(reader).astype('float32'))
     reader = f.get('mask')
