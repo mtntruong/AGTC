@@ -4,8 +4,9 @@ import shutil
 import cv2
 import numpy as np
 
-inp_path = './Train/'
+inp_path = './HDR-Train/'
 out_path = './IMG_Patches/'
+os.makedirs(out_path, exist_ok=True)
 
 img_height = 980
 img_width = 1820
@@ -35,9 +36,9 @@ for idx in range(132):
     image_gt     = cv2.cvtColor(cv2.imread(inp_path + "HDR/{:06d}.hdr".format(idx+1), cv2.IMREAD_UNCHANGED),
                                 cv2.COLOR_BGR2RGB).astype(np.float32)
     
-    omega_short  = cv2.imread(inp_path + "OMEGA_warped/{:06d}_01.png".format(idx+1), cv2.IMREAD_UNCHANGED) / 255.0
-    omega_medium = cv2.imread(inp_path + "OMEGA_warped/{:06d}_02.png".format(idx+1), cv2.IMREAD_UNCHANGED) / 255.0
-    omega_long   = cv2.imread(inp_path + "OMEGA_warped/{:06d}_03.png".format(idx+1), cv2.IMREAD_UNCHANGED) / 255.0
+    omega_short  = cv2.imread(inp_path + "OMEGA/{:06d}_01.png".format(idx+1), cv2.IMREAD_UNCHANGED) / 255.0
+    omega_medium = cv2.imread(inp_path + "OMEGA/{:06d}_02.png".format(idx+1), cv2.IMREAD_UNCHANGED) / 255.0
+    omega_long   = cv2.imread(inp_path + "OMEGA/{:06d}_03.png".format(idx+1), cv2.IMREAD_UNCHANGED) / 255.0
     
     i = 0
     j = 0

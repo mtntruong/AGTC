@@ -38,7 +38,7 @@ conda activate agtc
 If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
 
 ### Data preprocessing
-Please see the scripts in `Data-Preparation` folder in each task. Note that the data for HDR imaging have not been uploaded yet.
+The `Data-Preparation` folder in each task contains datasets and source codes for preprocessing. The HSI datasets are included in the repository, while the HDR image datasets are uploaded to OneDrive (the links are provided in a text file). Note that the low dynamic range images in the HDR image datasets were already warped (aligned).
 
 ## Training
 ```
