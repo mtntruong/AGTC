@@ -2,10 +2,11 @@
 Source code and data for the paper  
 Attention-Guided Low-Rank Tensor Completion  
 Truong Thanh Nhat Mai, Edmund Y. Lam, and Chul Lee  
-IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024  
+IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 46, no. 12, pp. 9818-9833, 2024  
 https://doi.org/10.1109/TPAMI.2024.3429498
 
-For PDF, please visit https://mtntruong.github.io/
+For PDF, please visit https://mtntruong.github.io/  
+The appendix, which is somehow not included in the publisher's version, is freely available on the above website or can be directly accessed at [this link](https://mtntruong.github.io/assets/pdf/2024_TPAMI_supp.pdf).
 
 If you have any question, please open an issue.  
 The algorithm can also be applied to other applications. Please feel free to ask if you need help with training the algorithm using other datasets.
