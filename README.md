@@ -8,15 +8,15 @@ https://doi.org/10.1109/TPAMI.2024.3429498
 For PDF, please visit https://mtntruong.github.io/  
 The appendix, which is somehow not included in the publisher's version, is freely available on the above website or can be directly accessed at [this link](https://mtntruong.github.io/assets/pdf/2024_TPAMI_supp.pdf).
 
-If you have any question, please open an issue.  
-The algorithm can also be applied to other applications. Please feel free to ask if you need help with training the algorithm using other datasets.
+If you have any questions, please open an issue.  
+The algorithm can also be applied to other applications. Please feel free to ask if you need help training the algorithm on other datasets.
 
 # Source code
 The proposed algorithm is implemented in Python using PyTorch 1.11. There are two subfolders in this repository:
 - AGTC-HDR: application of the proposed algorithm in multi-exposure fusion-based HDR imaging (Section 4.1 in the paper)
 - AGTC-HSI: application in hyperspectral image restoration (Section 4.2 in the paper)
 
-We first upload the source codes of the proposed algorithm. Data and pre-trained weights will be updated later. Since the inputs of the proposed algorithm is as simple as
+We have first uploaded the source code of the proposed algorithm. Data and pre-trained weights will be updated later. Since the input to the proposed algorithm is as simple as
 ```
 data   = torch.rand(1, 103, 64, 64)
 omega  = torch.rand(1, 103, 64, 64) < 0.9
@@ -28,10 +28,10 @@ you can easily plug this model into your training codes. Important notes:
 - The variable `omega` is binary, since it's a mask indicating observed entries.
 - The number of channels (103 in this example) is hard-coded in `main_net.py`.
 
-I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work. The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
+I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work. The training/testing scripts of AGTC are similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
 
 ## Preparation
-Please use `env.yml` to create an environment in [Anaconda](https://www.anaconda.com)
+Please use `env.yml` to create an environment with [Anaconda](https://www.anaconda.com)
 ```
 conda env create -f env.yml
 ```
