@@ -12,18 +12,19 @@ If you have any question, please open an issue.
 The algorithm can also be applied to other applications. Please feel free to ask if you need help with training the algorithm using other datasets.
 
 # Source code
-The proposed algorithm is implemented in Python using PyTorch 1.11.  
+The proposed algorithm is implemented in Python using PyTorch 1.11. There are two subfolders in this repository:
+- AGTC-HDR: application of the proposed algorithm in multi-exposure fusion-based HDR imaging (Section 4.1 in the paper)
+- AGTC-HSI: application in hyperspectral image restoration (Section 4.2 in the paper)
+
 We first upload the source codes of the proposed algorithm. Data and pre-trained weights will be updated later. Since the inputs of the proposed algorithm is as simple as
 ```
 data   = torch.rand(1, 103, 64, 64)
-omega  = torch.rand(1, 103, 64, 64) < 0.9
+omega  = torch.rand(1, 103, 64, 64) < 0.9 # this is a binary mask
 model  = RPCA_Net(N_iter=10)
 output = model(data, omega)
 ```
-you can easily plug this model into your training codes. N. B. The batch size must be 1, `omega` is binary, and the number of channels (103 in this example) is hard-coded in `main_net.py`.
-Please also note that the source codes have not been refactored yet, so they are a little ugly.  
-I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work.  
-The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
+you can easily plug this model into your training codes. N. B. The batch size must be 1, `omega` is binary, and the number of channels (103 in this example) is hard-coded in `main_net.py`. Please also note that the source codes have not been refactored yet, so they are a little ugly.  
+I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work. The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
 
 ## Preparation
 
@@ -38,13 +39,8 @@ conda activate agtc
 ```
 If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
 
-### Data preprocessing
-The `Data-Preparation` folder in each task contains datasets and source codes for preprocessing. The HSI datasets are included in the repository, while the HDR image datasets are uploaded to OneDrive (the links are provided in a text file). Note that the low dynamic range images in the HDR image datasets were already warped (aligned).
-
-## Training
-```
-To be updated
-```
+### Data preprocessing, training, and testing
+Please refer to the README in each subfolder for detailed instructions.
 
 # Citation
 If our algorithm is useful for your research, please kindly cite our work
