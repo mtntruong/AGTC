@@ -19,11 +19,15 @@ The proposed algorithm is implemented in Python using PyTorch 1.11. There are tw
 We first upload the source codes of the proposed algorithm. Data and pre-trained weights will be updated later. Since the inputs of the proposed algorithm is as simple as
 ```
 data   = torch.rand(1, 103, 64, 64)
-omega  = torch.rand(1, 103, 64, 64) < 0.9 # this is a binary mask
+omega  = torch.rand(1, 103, 64, 64) < 0.9
 model  = RPCA_Net(N_iter=10)
 output = model(data, omega)
 ```
-you can easily plug this model into your training codes. N. B. The batch size must be 1, `omega` is binary, and the number of channels (103 in this example) is hard-coded in `main_net.py`. Please also note that the source codes have not been refactored yet, so they are a little ugly.  
+you can easily plug this model into your training codes. Important notes:
+- The batch size must be 1.
+- The variable `omega` is binary, since it's a mask indicating observed entries.
+- The number of channels (103 in this example) is hard-coded in `main_net.py`.
+
 I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work. The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
 
 ## Preparation
@@ -40,7 +44,7 @@ conda activate agtc
 If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
 
 ### Data preprocessing, training, and testing
-Please refer to the README in each subfolder for detailed instructions.
+Please see `README.md` in each subfolder for detailed instructions.
 
 # Citation
 If our algorithm is useful for your research, please kindly cite our work
@@ -50,6 +54,9 @@ If our algorithm is useful for your research, please kindly cite our work
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
   title={Attention-Guided Low-Rank Tensor Completion}, 
   year={2024},
-  pages={1-17},
-  doi={10.1109/TPAMI.2024.3429498}}
+  volume={46},
+  number={12},
+  pages={9818-9833},
+  doi={10.1109/TPAMI.2024.3429498}
 }
+```
