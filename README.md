@@ -31,8 +31,6 @@ you can easily plug this model into your training codes. Important notes:
 I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work. The training/testing scripts of AGTC is similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
 
 ## Preparation
-
-### Required Python packages
 Please use `env.yml` to create an environment in [Anaconda](https://www.anaconda.com)
 ```
 conda env create -f env.yml
@@ -43,7 +41,7 @@ conda activate agtc
 ```
 If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
 
-### Data preprocessing, training, and testing
+## Data preprocessing, training, and testing
 Please see `README.md` in each subfolder for detailed instructions.
 
 # Citation
