@@ -1,2 +1,0 @@
-Training set: https://dguackr-my.sharepoint.com/:u:/g/personal/mtntruong_dgu_ac_kr/EZzDojamk4dNh_fnp10CqAkBpesaufsu-cQ075YZ2V04-Q
-Test set: https://dguackr-my.sharepoint.com/:u:/g/personal/mtntruong_dgu_ac_kr/EQ5DyEDwkcpDmt29te_OrXIBayM86RNBudegf_K_CFDXpQ

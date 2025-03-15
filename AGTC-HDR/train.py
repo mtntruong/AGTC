@@ -11,6 +11,11 @@ from main_net import RPCA_Net
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        '--data_path',
+        required=True,
+        help='Path to training data.',
+    )
+    parser.add_argument(
         '--save_path',
         default='hdr_ckpts',
         help='Path for checkpointing.',
@@ -50,7 +55,7 @@ def train(opt):
 
     torch.backends.cudnn.benchmark = True
 
-    train_path = '../../HDR_DATA/TRAIN/HDM_warped_ssim'
+    train_path = opt.data_path
     data_train = MainNetDataset(train_path)
     data_train_loader = torch.utils.data.DataLoader(data_train, batch_size=1, shuffle=True, num_workers=4)
 

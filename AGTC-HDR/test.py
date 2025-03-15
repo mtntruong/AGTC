@@ -12,9 +12,19 @@ from util import inv_luma, luma_from_ev, write_EXR
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--data',
-        default='hdm',
-        help='Choosing test data.',
+        '--data_path',
+        required=True,
+        help='Path to test data.',
+    )
+    parser.add_argument(
+        '--checkpoint',
+        required=True,
+        help='Path to trained weight.',
+    )
+    parser.add_argument(
+        '--output_path',
+        default='./HDR_results',
+        help='Path to output folder.',
     )
     return parser.parse_args()
 
@@ -83,9 +93,9 @@ def create_images(img_folder, out_folder, ckpt_path, N_iter, img_width, img_heig
         image_long = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'SEQ', seq + '_03.tif'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
 
         # Read omega stack
-        omega_short = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'OMEGA_warped_ssim', seq + '_01.png'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
-        omega_medium = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'OMEGA_warped_ssim', seq + '_02.png'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
-        omega_long = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'OMEGA_warped_ssim', seq + '_03.png'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
+        omega_short = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'OMEGA', seq + '_01.png'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
+        omega_medium = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'OMEGA', seq + '_02.png'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
+        omega_long = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'OMEGA', seq + '_03.png'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
 
         # Patch reconstruction
         i = 0
@@ -126,9 +136,6 @@ def create_images(img_folder, out_folder, ckpt_path, N_iter, img_width, img_heig
 
                 # Stitching
                 HDR[h:h + 256, w:w + 256, :]   = copy.deepcopy(hdr_patch)
-                #HDR_L[h:h + 256, w:w + 256, :] = copy.deepcopy(hat_patch[:,:,0:3])
-                #HDR_M[h:h + 256, w:w + 256, :] = copy.deepcopy(hat_patch[:,:,3:6])
-                #HDR_R[h:h + 256, w:w + 256, :] = copy.deepcopy(hat_patch[:,:,6:9])
 
                 j = j + 1
             i = i + 1
@@ -140,40 +147,21 @@ def create_images(img_folder, out_folder, ckpt_path, N_iter, img_width, img_heig
         mask = np.dstack((mask, mask, mask))
         HDR = inv_luma(HDR)/65535.0
         HDR[mask == 1] = 1.0
-        #HDR_L = inv_luma(HDR_L) / 65535.0
-        #HDR_M = inv_luma(HDR_M) / 65535.0
-        #HDR_R = inv_luma(HDR_R) / 65535.0
         
         # Final writing
         write_EXR(os.path.join(out_folder, seq+'.exr'), HDR)
-        #write_EXR(os.path.join(out_folder, seq+'_01.exr'), HDR_L)
-        #write_EXR(os.path.join(out_folder, seq+'_02.exr'), HDR_M)
-        #write_EXR(os.path.join(out_folder, seq+'_03.exr'), HDR_R)
-
-        print(total_time)
 
 
 if __name__ == '__main__':
-    test_dir = '../../HDR_DATA/TEST/Test_HDM'
-
-    flag = True
+    
     opt_args = parse_args()
-    if opt_args.data == 'hdm':
-        out_dir = './HDM'
-        w = 1820
-        h = 980
-    elif opt_args.data == 'hdrv':
-        out_dir = './HDRv'
-        w = 1280
-        h = 720
-    else:
-        print('Incorrect dataset.')
-        flag = False
+    out_dir = opt_args.output_path
+    test_dir = opt_args.data_path
+    ckpt_path = opt_args.checkpoint
+    
+    os.makedirs(out_dir, exist_ok = True)
+    create_images(img_folder=test_dir, out_folder=out_dir,
+                  ckpt_path=ckpt_path, N_iter=10,
+                  img_width=1820, img_height=980)
 
-    if flag:
-        os.makedirs(out_dir, exist_ok = True)
-        create_images(img_folder=test_dir, out_folder=out_dir,
-                      ckpt_path='./hdr_ckpts/epoch_50.pth', N_iter=10,
-                      img_width=w, img_height=h)
 
-    print('Done')
