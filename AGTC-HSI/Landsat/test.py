@@ -10,16 +10,6 @@ from main_net import RPCA_Net
 from util import inv_luma, luma_from_ev, write_EXR
 
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--data',
-        default='hdm',
-        help='Choosing test data.',
-    )
-    return parser.parse_args()
-
-
 def load_pretrained(path, N_iter):
     model = RPCA_Net(N_iter=N_iter)
     model = model.cuda()
@@ -87,6 +77,6 @@ def create_images(ckpt_path, N_iter):
 
 if __name__ == '__main__':
     
-    create_images(ckpt_path='./hdr_ckpts/epoch_60.pth', N_iter=10)
+    create_images(ckpt_path='./Weight/AGTC-Landsat.pth', N_iter=10)
 
     print('Done')
