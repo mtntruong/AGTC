@@ -16,8 +16,8 @@ The proposed algorithm is implemented in Python using PyTorch 1.11. There are tw
 - AGTC-HDR: application of the proposed algorithm in multi-exposure fusion-based HDR imaging (Section 4.1 in the paper)
 - AGTC-HSI: application in hyperspectral image restoration (Section 4.2 in the paper)
 
-We have first uploaded the source code of the proposed algorithm. Data and pre-trained weights will be updated later. Since the input to the proposed algorithm is as simple as
-```
+Since the input to the proposed algorithm is as simple as
+```python
 data   = torch.rand(1, 103, 64, 64)
 omega  = torch.rand(1, 103, 64, 64) < 0.9
 model  = RPCA_Net(N_iter=10)
@@ -42,7 +42,7 @@ conda activate agtc
 If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
 
 ## Data preprocessing, training, and testing
-Please see `README.md` in each subfolder for detailed instructions.
+Please see `README.md` in each subfolder for detailed instructions regarding downloading and preprocessing data, running scripts, and using pre-trained weights.
 
 # Citation
 If our algorithm is useful for your research, please kindly cite our work

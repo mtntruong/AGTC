@@ -7,7 +7,6 @@ import argparse
 import h5py
 import numpy as np
 from main_net import RPCA_Net
-from util import inv_luma, luma_from_ev, write_EXR
 
 
 def load_pretrained(path, N_iter):
@@ -19,7 +18,7 @@ def load_pretrained(path, N_iter):
     return model
 
 
-def HDR_inference(model, img, omg):
+def inference(model, img, omg):
     img0 = torch.unsqueeze(img.cuda(), 0)
     omg0 = torch.unsqueeze(omg.cuda(), 0)
 
@@ -62,12 +61,12 @@ def create_images(ckpt_path, N_iter):
             omega_patch = copy.deepcopy(omega[:, w:w + 64, h:h + 64])
             
             # Patch inference and reshape
-            C = HDR_inference(model, data_patch, omega_patch)
+            C = inference(model, data_patch, omega_patch)
 
             hsi_patch = C.transpose(2, 1, 0)
 
             # Stitching
-            HSI[h:h + 64, w:w + 64, :]   = copy.deepcopy(hsi_patch)
+            HSI[h:h + 64, w:w + 64, :] = copy.deepcopy(hsi_patch)
 
             j = j + 1
         i = i + 1
