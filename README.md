@@ -18,9 +18,9 @@ The proposed algorithm is implemented in Python using PyTorch 1.11. There are tw
 
 Since the input of the proposed deep network is as simple as
 ```python
-data   = torch.rand(1, 103, 64, 64)
-omega  = torch.rand(1, 103, 64, 64) < 0.9
-model  = RPCA_Net(N_iter=10, tensor_num_channels=103)
+data   = torch.rand(1, 103, 64, 64).cuda()
+omega  = (torch.rand(1, 103, 64, 64) < 0.9).float().cuda()
+model  = RPCA_Net(N_iter=10, tensor_num_channels=103).cuda()
 output = model(data, omega)
 ```
 you can easily plug this model into your training codes. Important notes:
