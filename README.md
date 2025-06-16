@@ -16,11 +16,11 @@ The proposed algorithm is implemented in Python using PyTorch 1.11. There are tw
 - AGTC-HDR: application of the proposed algorithm in multi-exposure fusion-based HDR imaging (Section 4.1 in the paper)
 - AGTC-HSI: application in hyperspectral image restoration (Section 4.2 in the paper)
 
-Since the input to the proposed algorithm is as simple as
+Since the input of the proposed deep network is as simple as
 ```python
 data   = torch.rand(1, 103, 64, 64)
 omega  = torch.rand(1, 103, 64, 64) < 0.9
-model  = RPCA_Net(N_iter=10)
+model  = RPCA_Net(N_iter=10, tensor_num_channels=103)
 output = model(data, omega)
 ```
 you can easily plug this model into your training codes. Important notes:
