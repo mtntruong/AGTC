@@ -26,9 +26,6 @@ output = model(data, omega)
 you can easily plug this model into your training codes. Important notes:
 - The batch size must be 1.
 - The variable `omega` is binary, since it's a mask indicating observed entries.
-- The number of channels (103 in this example) is hard-coded in `main_net.py`.
-
-I will try to improve the readability and quality of this repository over time. I have been a bit busy recently due to company work. The training/testing scripts of AGTC are similar to those of [LRT-HDR](https://github.com/mtntruong/LRT-HDR). You may have a look at them in the meantime.
 
 ## Preparation
 Please use `env.yml` to create an environment with [Anaconda](https://www.anaconda.com)
@@ -42,7 +39,7 @@ conda activate agtc
 If you want to change the environment name, edit the first line of `env.yml` before creating the environment.
 
 ## Data preprocessing, training, and testing
-Please see `README.md` in each subfolder for detailed instructions regarding downloading and preprocessing data, running scripts, and using pre-trained weights.
+Please see the `README.md` file in each subfolder for detailed instructions on downloading and preprocessing data, running scripts, and using pre-trained weights for the corresponding task.
 
 # Citation
 If our algorithm is useful for your research, please kindly cite our work
