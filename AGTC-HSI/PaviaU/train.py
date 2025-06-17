@@ -69,7 +69,7 @@ def train(opt):
     model.cuda()
     optimizer = torch.optim.Adam(model.parameters(), lr=3e-5)
     loss = torch.nn.L1Loss()
-    summary(model, input_size=[(1, 103, 64, 64), (1, 103, 64, 64)])
+    summary(model, input_size=[(1, opt.input_dim, 64, 64), (1, opt.input_dim, 64, 64)])
 
     if opt.resume is not None:
         print('Resume training from' + opt.resume)
