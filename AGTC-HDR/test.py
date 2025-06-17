@@ -29,8 +29,8 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_pretrained(path, N_iter):
-    model = RPCA_Net(N_iter=N_iter)
+def load_pretrained(path, N_iter, input_dim):
+    model = RPCA_Net(N_iter=N_iter, tensor_num_channels=input_dim)
     model = model.cuda()
     checkpoint = torch.load(path)
     model.load_state_dict(checkpoint['model_state_dict'])
@@ -54,9 +54,9 @@ def HDR_inference(model, img0, img1, img2, omg0, omg1, omg2):
     return hat_patch, hdr_patch
 
 
-def create_images(img_folder, out_folder, ckpt_path, N_iter, img_width, img_height):
+def create_images(img_folder, out_folder, ckpt_path, N_iter, input_dim, img_width, img_height):
     # Load model
-    model = load_pretrained(ckpt_path, N_iter)
+    model = load_pretrained(ckpt_path, N_iter, input_dim)
 
     # Grid
     w_grid = [0]
@@ -83,9 +83,6 @@ def create_images(img_folder, out_folder, ckpt_path, N_iter, img_width, img_heig
 
         # Storing final HDR image
         HDR   = np.float32(np.zeros((img_height, img_width, 3)))
-        #HDR_L = np.float32(np.zeros((img_height, img_width, 3)))
-        #HDR_M = np.float32(np.zeros((img_height, img_width, 3)))
-        #HDR_R = np.float32(np.zeros((img_height, img_width, 3)))
 
         # Read image stack
         image_short = cv2.cvtColor(cv2.imread(os.path.join(img_folder, 'SEQ', seq + '_01.tif'), cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB)
@@ -161,7 +158,7 @@ if __name__ == '__main__':
     
     os.makedirs(out_dir, exist_ok = True)
     create_images(img_folder=test_dir, out_folder=out_dir,
-                  ckpt_path=ckpt_path, N_iter=10,
+                  ckpt_path=ckpt_path, N_iter=10, input_dim=9,
                   img_width=1820, img_height=980)
 
 

@@ -13,7 +13,7 @@ ppd = 30;
 
 gt_dirs = './HDR_GT/'; % This folder contains ground-truth .HDR files
 gtNames = dir(fullfile(gt_dirs,'*.hdr'));
-    
+
 hdr_dirs = './HDR_Outputs/'; % This folder contains output .EXR files
 imageNames = dir(fullfile(hdr_dirs,'*.exr'));
 

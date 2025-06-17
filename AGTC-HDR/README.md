@@ -39,6 +39,6 @@ Regarding this weird practice, I have tried several ways to automatically update
 ## Testing
 Generate the HDR images from trained weights by executing
 ```bash
-python test.py --data_path=./Data-Preparation/HDR-Test --output_path=./HDR_results --checkpoint=./Weight/AGTC-HDR.pth
+python test.py --data_path=./Data-Preparation/HDR-Test --output_path=./HDR_Outputs --checkpoint=./Weight/AGTC-HDR.pth
 ```
 The synthesized HDR images will be written in the folder specified by `--output-path`
