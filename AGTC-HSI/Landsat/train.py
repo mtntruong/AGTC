@@ -17,7 +17,7 @@ def parse_args():
     )
     parser.add_argument(
         '--save_path',
-        default='hdr_ckpts',
+        default='checkpoints',
         help='Path for checkpointing.',
     )
     parser.add_argument(
@@ -43,6 +43,12 @@ def parse_args():
         help='Number of unrolled iterations.',
     )
     parser.add_argument(
+        '--input_dim',
+        type=int,
+        default=8,
+        help='Number of channels of the input tensor.',
+    )
+    parser.add_argument(
         '--set_lr',
         type=float,
         default=-1,
@@ -59,7 +65,7 @@ def train(opt):
     data_train = HSIDataset(train_path)
     data_train_loader = torch.utils.data.DataLoader(data_train, batch_size=1, shuffle=True, num_workers=4)
 
-    model = RPCA_Net(N_iter=opt.N_iter)
+    model = RPCA_Net(N_iter=opt.N_iter, tensor_num_channels=opt.input_dim)
     model.cuda()
     optimizer = torch.optim.Adam(model.parameters(), lr=3e-5)
     loss = torch.nn.L1Loss()

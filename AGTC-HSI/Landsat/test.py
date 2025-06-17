@@ -9,8 +9,8 @@ import numpy as np
 from main_net import RPCA_Net
 
 
-def load_pretrained(path, N_iter):
-    model = RPCA_Net(N_iter=N_iter)
+def load_pretrained(path, N_iter, input_dim):
+    model = RPCA_Net(N_iter=N_iter, tensor_num_channels=input_dim)
     model = model.cuda()
     checkpoint = torch.load(path)
     model.load_state_dict(checkpoint['model_state_dict'])
@@ -29,9 +29,9 @@ def inference(model, img, omg):
     return hsi_patch
 
 
-def create_images(ckpt_path, N_iter):
+def create_images(ckpt_path, N_iter, input_dim):
     # Load model
-    model = load_pretrained(ckpt_path, N_iter)
+    model = load_pretrained(ckpt_path, N_iter, input_dim)
 
     # Grid
     w_grid = [0, 256]
@@ -72,10 +72,10 @@ def create_images(ckpt_path, N_iter):
         i = i + 1
         j = 0
     
-    np.save('HSI.npy', HSI)
+    np.save('Landsat-AGTC.npy', HSI)
 
 if __name__ == '__main__':
     
-    create_images(ckpt_path='./Weight/AGTC-Landsat.pth', N_iter=10)
+    create_images(ckpt_path='./Weight/AGTC-Landsat.pth', N_iter=10, input_dim=8)
 
     print('Done')

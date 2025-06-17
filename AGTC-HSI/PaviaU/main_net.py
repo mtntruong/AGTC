@@ -30,7 +30,7 @@ class RDB_Conv(nn.Module):
 
 
 class RDB(nn.Module):
-    def __init__(self, growRate0, growRate, nConvLayers):
+    def __init__(self, tensor_num_channels, growRate0, growRate, nConvLayers):
         super(RDB, self).__init__()
         G0 = growRate0
         G  = growRate
@@ -45,8 +45,8 @@ class RDB(nn.Module):
         self.LFF = nn.Conv2d(G0 + C*G, G0, 1, padding=0, stride=1)
 
         # In/Out conv
-        self.in_conv = nn.Conv2d(in_channels=103, out_channels=64, kernel_size=3, stride=1, padding=1)
-        self.out_conv = nn.Conv2d(in_channels=64, out_channels=103, kernel_size=3, stride=1, padding=1)
+        self.in_conv = nn.Conv2d(in_channels=tensor_num_channels, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.out_conv = nn.Conv2d(in_channels=64, out_channels=tensor_num_channels, kernel_size=3, stride=1, padding=1)
 
     def forward(self, x):
         x = self.in_conv(x)
@@ -56,7 +56,7 @@ class RDB(nn.Module):
 
 
 class RPCA_Block(nn.Module):
-    def __init__(self):
+    def __init__(self, tensor_num_channels):
         super(RPCA_Block, self).__init__()
 
         self.lamb  = nn.Parameter(torch.ones(1)*0.001, requires_grad=True)
@@ -65,8 +65,8 @@ class RPCA_Block(nn.Module):
         self.alpha = nn.Parameter(torch.ones(1)*0.001, requires_grad=True)
         self.beta  = nn.Parameter(torch.ones(1)*0.001, requires_grad=True)
 
-        self.Proximal_P = RDB(growRate0=64, growRate=32, nConvLayers=8)
-        self.Proximal_Q = RDB(growRate0=64, growRate=32, nConvLayers=6)
+        self.Proximal_P = RDB(tensor_num_channels, growRate0=64, growRate=32, nConvLayers=8)
+        self.Proximal_Q = RDB(tensor_num_channels, growRate0=64, growRate=32, nConvLayers=6)
 
     def tensor_product(self, L, R):
         Lf = torch.fft.fft(torch.squeeze(L), n=L.shape[-1], dim=2).permute(2, 0, 1)
@@ -125,19 +125,20 @@ class RPCA_Block(nn.Module):
 
 
 class RPCA_Net(nn.Module):
-    def __init__(self, N_iter):
+    def __init__(self, N_iter, tensor_num_channels):
         super(RPCA_Net, self).__init__()
 
         # Number of unrolled iterations
         self.N_iter = N_iter
+        self.tensor_num_channels = tensor_num_channels
 
         # Weight for RLS
-        self.att_module = SpatialAttentionModule(103)
+        self.att_module = SpatialAttentionModule(self.tensor_num_channels)
 
         # Unrolled network
         blocks_list = []
         for i in range(self.N_iter):
-            blocks_list.append(RPCA_Block())
+            blocks_list.append(RPCA_Block(self.tensor_num_channels))
         self.network = nn.ModuleList(blocks_list)
 
     def forward(self, data, omega):
@@ -160,7 +161,7 @@ class RPCA_Net(nn.Module):
         P  = torch.zeros(C.size(), device=torch.device('cuda'))
         Q  = torch.zeros(C.size(), device=torch.device('cuda'))
         # Init L/R
-        L = torch.ones((103, 10, OmegaD.shape[-1]), device=torch.device('cuda')) / 1e2
+        L = torch.ones((self.tensor_num_channels, 10, OmegaD.shape[-1]), device=torch.device('cuda')) / 1e2
         R = torch.ones((10, OmegaD.shape[-2], OmegaD.shape[-1]), device=torch.device('cuda')) / 1e2
 
         # Main net

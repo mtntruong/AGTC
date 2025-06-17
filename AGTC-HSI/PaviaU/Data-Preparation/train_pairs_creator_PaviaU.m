@@ -6,6 +6,11 @@ Omsi = paviau(1:256,1:256,:);
 rate = 0.5;
 Mean = mean(Omsi(:));
 
+mkdir('./Train_Pairs_PaviaU/GT/')
+mkdir('./Train_Pairs_PaviaU/HSI/')
+mkdir('./Train_Pairs_PaviaU/OMEGA/')
+
+
 M=64;
 N=64;
 p=103;
@@ -35,5 +40,4 @@ for idx = 1 : 500
         save(['./Train_Pairs_PaviaU/HSI/' mat_name '.mat'], 'Nmsi', '-v7.3');
         save(['./Train_Pairs_PaviaU/OMEGA/' mat_name '.mat'], 'Omega3_3D', '-v7.3');
     end
-%     break
 end

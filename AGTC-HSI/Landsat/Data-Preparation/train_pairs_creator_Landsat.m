@@ -7,6 +7,10 @@ gt = double(Landsat7_training_clean) / 139.0;
 mask = double(Landsat7_training_mask);
 hsi = gt .* mask;
 
+mkdir('./Train_Pairs_Landsat/GT/')
+mkdir('./Train_Pairs_Landsat/HSI/')
+mkdir('./Train_Pairs_Landsat/OMEGA/')
+
 mat_idx = -1;
 
 for idx = 1 : 4500
@@ -24,5 +28,4 @@ for idx = 1 : 4500
     
     Omega3_3D = mask(pix_x:pix_x+255, pix_y:pix_y+255, :);
     save(['./Train_Pairs_Landsat/OMEGA/' mat_name '.mat'], 'Omega3_3D', '-v7.3');
-%     break
 end
